@@ -1,0 +1,27 @@
+{%extends 'proyectoWebApp/base.html'%}
+
+{% load static %}
+
+{%block content %}
+
+    {% for post in posts %}
+
+<section class="page-section clearfix">
+    <div class="container">
+      <div class="intro">
+        <!-- este link hace referencia a la imagen del post-->
+        <img class="intro-img img-fluid mb-3 mb-lg-0 rounded" src="{{post.imagen.url}}" alt="" style='width: 50%'>
+        <div class="intro-text left-0 text-center bg-faded p-5 rounded">
+          <h2 class="section-heading mb-4" >
+            <!-- estos links siguientes hacen referencia al titulo y al contenido -->
+            <span class="section-heading-lower" style='color: yellowgreen'>{{post.titulo}}</span>
+            <span class="section-heading-upper">{{post.contenido}}</span>
+          </h2>
+        </div>
+      </div>
+    </div>
+</section>
+
+    {% endfor %}
+
+{% endblock %}
