@@ -17,11 +17,32 @@
             <span class="section-heading-lower" style='color: yellowgreen'>{{post.titulo}}</span>
             <span class="section-heading-upper">{{post.contenido}}</span>
           </h2>
+          <div style='text-align:left; font-size: 0.8em'> Autor: {{post.autor}}</div>
         </div>
       </div>
     </div>
 </section>
 
     {% endfor %}
+
+    <section>
+        <!--Margin: alinea la caja.
+        text-align: alinea el texto.
+        color: color de la letra
+        width: tamanio de la caja-->
+        <div style="width: 75%; color: white; margin:auto; text-align: center;">
+
+            Categorias: 
+            <!--recorremos los posts-->
+                {% for post in posts %}
+                    <!--recorremos las categorias de los posts 
+                    y almacenamos los datos en la variable 'categoria' -->
+                    {% for categoria in post.categorias.all %}
+                        <!--luego accedemos al nombre de cada categoria-->
+                        {{categoria.nombre}} &nbsp; &nbsp;
+                    {% endfor %}
+                {% endfor %}
+        </div>
+    </section>
 
 {% endblock %}
