@@ -39,7 +39,7 @@
                     y almacenamos los datos en la variable 'categoria' -->
                     {% for categoria in post.categorias.all %}
                         <!--luego accedemos al nombre de cada categoria-->
-                        {{categoria.nombre}} &nbsp; &nbsp;
+                        <a href="{% url 'categoria' categoria.id %}" class='linksCategorias'>{{categoria.nombre}}</a> &nbsp; &nbsp;
                     {% endfor %}
                 {% endfor %}
         </div>
