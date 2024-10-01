@@ -4,6 +4,11 @@
 
 {%block content %}
 
-<div style="display: flex; gap: 20px; color: white;">{{mi_formulario}}</div>
+<div class='contenedorFormulario'>
+    <form action="" method="POST" style="text-align: center;">
+        <table style="color: white; margin: 20px auto;">{{mi_formulario.as_table}}</table>
+        <input type='submit' value='Enviar' style='width: 150px;'>
+    </form>
+</div>
 
 {% endblock %}
