@@ -5,7 +5,16 @@
 {%block content %}
 
 <div class='contenedorFormulario'>
+
+    {% if 'valido' in request.GET %}
+        <p style='color: black'> Informacion enviada correctamente. Gracias! </p>
+    {% endif %}
+    <!--POST: La informacion del form no se muestra en la URL
+        GET:  La informacion del form se muestra en la URL-->
     <form action="" method="POST" style="text-align: center;">
+        <!--Agrega un campo oculto en el formulario q incluye una clave cambiante
+        El navegador comprueba q esa clave esta incluida. Si no esta, da error. Sino permite enviar el fomulario.-->
+        {% csrf_token %}
         <table style="color: white; margin: 20px auto;">{{mi_formulario.as_table}}</table>
         <input type='submit' value='Enviar' style='width: 150px;'>
     </form>
