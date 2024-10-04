@@ -1,7 +1,10 @@
 from django.shortcuts import render, redirect
-from .forms import Formulario_contacto
+from Contacto.forms import Formulario_contacto
 from django.core.mail import EmailMessage
 from django.conf import settings
+from django.core.exceptions import ValidationError
+from django.core.mail import BadHeaderError
+from smtplib import SMTPException
 # Create your views here.
 
 def contacto(request):
@@ -14,12 +17,18 @@ def contacto(request):
             contenido = request.POST.get('contenido')
 
             email = EmailMessage('Mensaje desde App Django', 
-            'El usuario con nombre {} con la direccion {} escribe lo siguiente:\n\n {}'
-            .format(nombre, email, contenido), '',[settings.EMAIL_HOST_USER], reply_to=[email])
+            'El usuario con nombre {} con la direccion {} escribe lo siguiente:\n\n {}'.format(nombre, email, contenido), '',[settings.EMAIL_HOST_USER], reply_to=[email])
             try:
                 email.send()
                 return redirect('/contacto/?valido')
-            except:
+            except ValidationError as e:
+                print(f'Error de validacion: {e}')
+            except Exception as e:
+                print(f'Error inesperado: {e}')
+            except BadHeaderError:
+                print("Header inválido.")
+            except SMTPException as e:
+                print(f"Error en SMTP: {e}")
                 return redirect('/contacto/?no_valido')
     return render(request, 'contacto/contacto.html', {'mi_formulario': formulario_contacto})
 
