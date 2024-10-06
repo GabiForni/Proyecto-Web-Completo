@@ -21,12 +21,6 @@ def contacto(request):
             try:
                 email.send()
                 return redirect('/contacto/?valido')
-            except ValidationError as e:
-                print(f'Error de validacion: {e}')
-            except Exception as e:
-                print(f'Error inesperado: {e}')
-            except BadHeaderError:
-                print("Header inválido.")
             except SMTPException as e:
                 print(f"Error en SMTP: {e}")
                 return redirect('/contacto/?no_valido')
